@@ -2,6 +2,7 @@ import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import InputSearchUser from './Components/InputSearchUser';
 import UserProfile from './Components/UserProfile';
+import Menu from './Components/Menu';
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
               </Col>
             </Row>
             <Row>
-              <Col  xs="auto">
-                Menu
+              <Col>
+                <Menu />
               </Col>
             </Row>          
         </Col>
