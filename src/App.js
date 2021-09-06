@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import InputSearchUser from './Components/InputSearchUser';
 import UserProfile from './Components/UserProfile';
 import Menu from './Components/Menu';
+import RepositoryList from './Components/RepositoryList';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
             </Row>          
         </Col>
         <Col className="conteudo" xs={12} md={9}>
-          Lista Repositório
+          <RepositoryList/>
         </Col>
       </Row>
     </Container>
