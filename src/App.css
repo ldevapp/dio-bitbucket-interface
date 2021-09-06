@@ -41,7 +41,7 @@
 .perfil-menu {
   background-color: rgb(244, 245, 247);
   margin: 0;
-  padding: 10px;
+  padding: 0px 10px;
   left: 0px;
   overflow-x: hidden;
   color: rgb(66, 82, 110);
@@ -51,4 +51,9 @@
 
 .conteudo {
   height: 100vh;
+}
+
+.search-user {
+  background-color: rgb(7, 71, 166);
+  padding: 10px;
 }

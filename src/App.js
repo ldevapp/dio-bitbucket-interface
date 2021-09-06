@@ -1,5 +1,6 @@
 import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
+import InputSearchUser from './Components/InputSearchUser';
 
 function App() {
   return (
@@ -7,8 +8,8 @@ function App() {
       <Row>
         <Col className="perfil-menu" xs={12} md={3}>
             <Row>
-              <Col xs="auto">
-                <input type="text" placeholder="Buscar usuário"/>
+              <Col xs="auto" className="search-user">
+                <InputSearchUser />
               </Col>
             </Row>
             <Row>
