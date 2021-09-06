@@ -29,6 +29,32 @@ export default function index() {
                         <b>Site:</b> Site
                     </Col>
                 </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <Row>
+                            <Col xs={4} md={4} className="user-profile-data-info" align="center">
+                                <b>Repositório</b>
+                            </Col>
+                            <Col xs={4} md={4} className="user-profile-data-info" align="center">
+                                <b>Followers</b>
+                            </Col>
+                            <Col xs={4} md={4} className="user-profile-data-info" align="center">
+                                <b>Followings</b>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={4} md={4} className="user-profile-data-info" align="center">
+                                0
+                            </Col>
+                            <Col xs={4} md={4} className="user-profile-data-info" align="center">
+                                0
+                            </Col>
+                            <Col xs={4} md={4} className="user-profile-data-info" align="center">
+                                0
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
             </Col>
         </Row>
     )
