@@ -1,6 +1,7 @@
 import './App.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import InputSearchUser from './Components/InputSearchUser';
+import UserProfile from './Components/UserProfile';
 
 function App() {
   return (
@@ -14,11 +15,11 @@ function App() {
             </Row>
             <Row>
               <Col>
-                Perfil
+                <UserProfile/>
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col  xs="auto">
                 Menu
               </Col>
             </Row>          
