@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import useBitbucket from '../../Hooks/Bitbucker-hooks';
 import {Card, Table} from 'react-bootstrap';
 
-export default function index() {
+const Repositories = () => {
+
+    const {state, getRepositories} = useBitbucket();    
+
+    useEffect(()=>{
+        getRepositories('tutorials');
+    }, []);
+
     return (
         <Card style={{border:'none'}}>
             <Card.Body>
@@ -16,16 +24,13 @@ export default function index() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>LogoLingaguem - Repositório</td>
-                            <td>Descrição</td>
-                            <td>06/09/2021</td>
-                        </tr>
-                        <tr>
-                            <td>LogoLingaguem - Repositório</td>
-                            <td>Descrição</td>
-                            <td>06/09/2021</td>
-                        </tr>
+                        {state.repositories.values.map((item)=>(
+                            <tr>
+                                <td>{item.name}</td>
+                                <td>{item.description}</td>
+                                <td>{item.updated_on}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
                 </Card.Text>
@@ -33,3 +38,5 @@ export default function index() {
         </Card>
     )
 }
+
+export default Repositories;
