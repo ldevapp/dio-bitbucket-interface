@@ -11,7 +11,7 @@
 
 .menu .nav-link.active {
     border-right: 10px solid rgb(7, 71, 166);
-    border-bottom: 1px solid rgb(7, 71, 166);
+    /* border-bottom: 1px solid rgb(7, 71, 166); */
     color: rgb(7, 71, 166);
 }
 

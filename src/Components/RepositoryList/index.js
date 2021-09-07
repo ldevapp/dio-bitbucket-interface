@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import useBitbucket from '../../Hooks/Bitbucker-hooks';
 import {Card, Table} from 'react-bootstrap';
+import ListItem from './ListItem';
+import PaginationList from './PaginationList';
 
 const Repositories = () => {
 
-    const {state, getRepositories} = useBitbucket();    
-
-    useEffect(()=>{
-        getRepositories('tutorials');
-    }, []);
+    const {state, getRepositories, hasRepositories} = useBitbucket();    
 
     return (
-        <Card style={{border:'none'}}>
+       
+        <Card style={{border:'none'}} visuallyHidden={state.loading}>
             <Card.Body>
                 <Card.Title className="title">Repositórios</Card.Title>
                 <Card.Text>
@@ -24,18 +23,29 @@ const Repositories = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {state.repositories.values.map((item)=>(
+                        {(state.repositories.values.length > 0)
+                        ?
+                            state.repositories.values.map((item)=>(
+                                <ListItem
+                                    avatar={item.links.avatar.href}
+                                    name={item.name}
+                                    description={item.description}
+                                    updated={item.updated_on}
+                                />
+                            ))
+                        :
                             <tr>
-                                <td>{item.name}</td>
-                                <td>{item.description}</td>
-                                <td>{item.updated_on}</td>
+                                <td colspan="3">Nenhum registro.</td>
                             </tr>
-                        ))}
+                        }
                     </tbody>
                 </Table>
+                <PaginationList/>
+                
                 </Card.Text>
             </Card.Body>
         </Card>
+       
     )
 }
 
