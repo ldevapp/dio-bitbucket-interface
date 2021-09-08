@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const origin = 'http://localhost:3000/';
+const origin = window.location.origin;
 
 const Api = axios.create({
   baseURL: `https://api.bitbucket.org/`,
