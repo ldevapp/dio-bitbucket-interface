@@ -13,6 +13,7 @@ const stateDefault = {
         project: null,
         avatar: null,
     },
+    activePage: 1,
     repositories: {
         values:[]
     }
@@ -81,12 +82,21 @@ const BitbucketProvider = ({children}) => {
         }));
     }
 
+    const setActivePage = (page) => {
+        // console.log(user)
+        setState((prevState)=>({
+            ...prevState,
+            activePage: page,
+        }));
+    }
+
     const contextValue = {
         state,
         clearData: useCallback(() => clearData(), []),
         getRepositories: useCallback((username, page) => getRepositories(username, page), []),
         setUsername: useCallback((username) => setUsername(username), []),
-        setUser: useCallback((user) => setUser(user), [])
+        setUser: useCallback((user) => setUser(user), []),
+        setActivePage: useCallback((page) => setActivePage(page), [])
     };
 
     return (

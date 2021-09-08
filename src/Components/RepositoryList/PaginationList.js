@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Pagination} from 'react-bootstrap';
 import useBitbucket from '../../Hooks/Bitbucker-hooks';
 
 const PaginationList = ()=>{
 
-    const {state, getRepositories} = useBitbucket();
-    let [activePage, setActivePage] = useState(1);
+    const {state, getRepositories, setActivePage} = useBitbucket();
 
     const handleClickPagination = (page) => {
         return () => {
@@ -20,7 +19,7 @@ const PaginationList = ()=>{
         items.push(
             <Pagination.Item 
                 key={number} 
-                active={number === activePage}
+                active={number === state.activePage}
                 onClick={handleClickPagination(number)}
             >
             {number}
