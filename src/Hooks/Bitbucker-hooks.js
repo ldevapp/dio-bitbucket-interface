@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { BitbucketContext } from "../Providers/Bitbucket-provider";
 
 const useBitbucket = () => {
-  const { state, getRepositories, setUsername, setUser, hasRepositories, setPage } = useContext(
+  const { state, clearData, getRepositories, setUsername, setUser } = useContext(
     BitbucketContext
   );
 
-  return { state, getRepositories, setUsername, setUser, hasRepositories, setPage };
+  return { state, clearData, getRepositories, setUsername, setUser };
 };
 
 export default useBitbucket;

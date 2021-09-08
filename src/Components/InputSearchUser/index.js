@@ -1,20 +1,33 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import useBitbucket from '../../Hooks/Bitbucker-hooks';
 import { InputGroup, Button, Form } from 'react-bootstrap';
 
 const InputSearchUser = ()=> {
 
-    const {state, setUsername, getRepositories} = useBitbucket();
+    const {state, clearData, setUsername, getRepositories} = useBitbucket();
     const inputSearch = useRef(null);
 
     useEffect(()=>{
-        if(state.user)
-            getRepositories(state.username);
-    }, [state.username]);
+        
+        setUsername('atlassian_tutorial'); 
+
+    }, []);
+
+    useEffect(()=>{
+        
+        getRepositories(state.username);
+
+    }, [state.username, getRepositories]);
 
     function handleSearch(event) {
+        
+        setUsername(inputSearch.current.value);
 
-        setUsername(inputSearch.current.value)
+        if(!inputSearch.current.value){   
+            // console.log('Limpar dados'); 
+            clearData();        
+            return;
+        } 
     }
 
     return (
@@ -30,9 +43,9 @@ const InputSearchUser = ()=> {
                     required
                 />                
                 <Button 
-                    variant="secondary" 
-                    id="btn-search-user"
                     onClick={handleSearch}
+                    variant="secondary" 
+                    id="btn-search-user"                    
                 >
                     Buscar
                 </Button>

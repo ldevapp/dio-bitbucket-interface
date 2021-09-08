@@ -4,7 +4,8 @@ import Api from '../Services/Api';
 const stateDefault = {
     hasUser: false,
     loading: false,
-    username: 'atlassian_tutorial',
+    // username: 'atlassian_tutorial',
+    username: null,
     user: {
         username: null,
         name: null,
@@ -12,31 +13,27 @@ const stateDefault = {
         project: null,
         avatar: null,
     },
-    page: 1,
     repositories: {
         values:[]
     }
 };
 
-export const BitbucketContext = createContext({
-    loading: false,
-    user: {},
-    repositories: []
-});
+export const BitbucketContext = createContext({...stateDefault});
 
 const BitbucketProvider = ({children}) => {
-    const [state, setState] = useState(stateDefault);
+    const [state, setState] = useState({...stateDefault});
 
     const getRepositories = (username, page=1)=> {
         
-        // setState((prevState)=>({
-        //     ...prevState,
-        //     loading: !prevState.loading
-        // }));
-        if(username === null || username == ''){
+        setState((prevState)=>({
+            ...prevState,
+            loading: true
+        }));
+
+        if(username === null || username === ''){
             setState((prevState)=>({
                 ...prevState,
-                loading: !prevState.loading,
+                loading: false,
                 repositories: [],
             }));
             return;
@@ -50,12 +47,24 @@ const BitbucketProvider = ({children}) => {
             // console.log("data: " + JSON.stringify(data));
             setState((prevState)=>({
                 ...prevState,
-                loading: !prevState.loading,
                 repositories: data,
+            }));
+        })
+        .catch((data)=>{
+            console.error('Erro:',data)
+        })
+        .finally(()=>{
+            setState((prevState)=>({
+                ...prevState,
+                loading: false
             }));
         });
 
     };
+
+    const clearData = () => {
+        setState({...stateDefault});
+    }
 
     const setUsername = (username) => {
         setState((prevState)=>({
@@ -72,25 +81,12 @@ const BitbucketProvider = ({children}) => {
         }));
     }
 
-    const hasRepositories = () => {
-        return (state.repositories.values.length > 0)? true : false;
-    }
-
-    const setPage = async (page) => {
-        // console.log(page);
-        await setState((prevState)=>({
-            ...prevState,
-            page: page,
-        }));
-    }
-
     const contextValue = {
         state,
+        clearData: useCallback(() => clearData(), []),
         getRepositories: useCallback((username, page) => getRepositories(username, page), []),
         setUsername: useCallback((username) => setUsername(username), []),
-        setUser: useCallback((user) => setUser(user), []),
-        hasRepositories: useCallback(() => hasRepositories(), []),
-        setPage: useCallback((page) => setPage(page), []),
+        setUser: useCallback((user) => setUser(user), [])
     };
 
     return (

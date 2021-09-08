@@ -4,14 +4,12 @@ import useBitbucket from '../../Hooks/Bitbucker-hooks';
 
 const PaginationList = ()=>{
 
-    let [active, setActive] = useState(1);
-    const {state, getRepositories, setPage} = useBitbucket();
+    const {state, getRepositories} = useBitbucket();
+    let [activePage, setActivePage] = useState(1);
 
     const handleClickPagination = (page) => {
         return () => {
-            console.log(page);
-            // setPage(page);
-            setActive(page);
+            setActivePage(page);
             getRepositories(state.username, page);
         }
     }   
@@ -22,7 +20,7 @@ const PaginationList = ()=>{
         items.push(
             <Pagination.Item 
                 key={number} 
-                active={number === active}
+                active={number === activePage}
                 onClick={handleClickPagination(number)}
             >
             {number}
