@@ -5,6 +5,7 @@ import InputSearchUser from './Components/InputSearchUser';
 import UserProfile from './Components/UserProfile';
 import Menu from './Components/Menu';
 import RepositoryList from './Components/RepositoryList';
+import logotipo from './images/logo192.png';
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
         <Row>
           <Col className="perfil-menu" xs={12} md={3}>
               <Row>
-                <Col xs="auto" className="search-user">
+                <Col xs="2" className="logotipo" align="center">
+                  <img src={logotipo} alt="Logotipo Bitbucket" width="46"/>
+                </Col>
+                <Col xs="10" className="search-user">
                   <InputSearchUser />
                 </Col>
               </Row>
