@@ -6,7 +6,23 @@ import PaginationList from './PaginationList';
 
 const Repositories = () => {
 
-    const {state, getRepositories} = useBitbucket();    
+    const {state} = useBitbucket();   
+    
+    const renderListItem = (item, index) => {
+
+        const {name, description, updated_on, links} = item;
+
+        return (
+            <ListItem
+                key={index.toString()}
+                avatar={links.avatar.href}
+                name={name}
+                description={description}
+                updated={updated_on}
+                href={links.html.href}
+            />
+        )
+    }
 
     if(state.loading){
         return (
@@ -41,27 +57,19 @@ const Repositories = () => {
                 <Table responsive="sm">
                     <thead>
                         <tr>
-                            <th width="40%">Repositório</th>
+                            <th width="35%">Repositório</th>
                             <th width="40%">Descrição</th>
                             <th width="20%">Atualização</th>
+                            <th width="5%">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                         {(state.repositories.values.length > 0)
                         ?
-                            state.repositories.values.map((item, index)=>(
-                                <ListItem
-                                    key={index.toString()}
-                                    avatar={item.links.avatar.href}
-                                    name={item.name}
-                                    description={item.description}
-                                    updated={item.updated_on}
-                                    href={item.links.html.href}
-                                />
-                            ))
+                            state.repositories.values.map(renderListItem)
                         :
                             <tr>
-                                <td colSpan="3">Nenhum registro.</td>
+                                <td colSpan="4">Nenhum registro.</td>
                             </tr>
                         }
                     </tbody>
