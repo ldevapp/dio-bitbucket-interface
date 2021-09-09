@@ -6,8 +6,10 @@ import UserProfile from './Components/UserProfile';
 import Menu from './Components/Menu';
 import RepositoryList from './Components/RepositoryList';
 import logotipo from './images/logo192.png';
+import AlertToast from './Components/AlertToast';
 
 function App() {
+
   return (
     <BitbuckerProvider>
       <Container fluid>
@@ -32,7 +34,8 @@ function App() {
                 </Col>
               </Row>          
           </Col>
-          <Col className="conteudo" xs={12} md={9}>
+          <Col className="conteudo" xs={12} md={9} >
+            <AlertToast />
             <RepositoryList/>
           </Col>
         </Row>

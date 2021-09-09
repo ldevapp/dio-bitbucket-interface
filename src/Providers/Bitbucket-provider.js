@@ -4,6 +4,9 @@ import Api from '../Services/Api';
 const stateDefault = {
     hasUser: false,
     loading: false,
+    messages: [
+        // {type: 'danger', title:'Teste', text:'Texto da mensagem'}
+    ],
     // username: 'atlassian_tutorial',
     username: null,
     user: {
@@ -44,15 +47,25 @@ const BitbucketProvider = ({children}) => {
         if(page)
             strPage = `?page=${page}`
 
-        Api.get(`2.0/repositories/${username}/${strPage}`).then(({data})=>{
+        Api.get(`2.0/repositories/${username}/${strPage}`).then(({status, data})=>{
             // console.log("data: " + JSON.stringify(data));
             setState((prevState)=>({
                 ...prevState,
                 repositories: data,
             }));
+
+            // if(data.status == 404){
+
+            // }
         })
         .catch((data)=>{
             console.error('Erro:',data)
+            // clearData();
+            
+            setState({
+                ...stateDefault, 
+                messages: [{type:'danger', title:'Erro', text: data.message}]
+            });
         })
         .finally(()=>{
             setState((prevState)=>({
@@ -90,13 +103,24 @@ const BitbucketProvider = ({children}) => {
         }));
     }
 
+    const setMessageError = (title, text) => {
+        // console.log(user)
+        // setState((prevState)=>({
+        //     ...prevState,
+        //     messages: [...prevState.messages, {type:'danger', title, text}],
+        // }));
+        setState({...stateDefault, messages: [{type:'danger', title, text}]});
+        // console.log({...stateDefault, messages: [{type:'danger', title, text}]})
+    }
+
     const contextValue = {
         state,
         clearData: useCallback(() => clearData(), []),
         getRepositories: useCallback((username, page) => getRepositories(username, page), []),
         setUsername: useCallback((username) => setUsername(username), []),
         setUser: useCallback((user) => setUser(user), []),
-        setActivePage: useCallback((page) => setActivePage(page), [])
+        setActivePage: useCallback((page) => setActivePage(page), []),
+        setMessageError: useCallback((title, text) => setMessageError(title, text), [])
     };
 
     return (
