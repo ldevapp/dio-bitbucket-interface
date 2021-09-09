@@ -11,7 +11,7 @@ const InputSearchUser = ()=> {
         
         setUsername('atlassian_tutorial'); 
 
-    }, []);
+    }, [setUsername]);
 
     useEffect(()=>{
         
