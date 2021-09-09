@@ -3,6 +3,7 @@ import useBitbucket from '../../Hooks/Bitbucker-hooks';
 import {Card, Table, Placeholder} from 'react-bootstrap';
 import ListItem from './ListItem';
 import PaginationList from './PaginationList';
+import './RepositoryList.css';
 
 const Repositories = () => {
 
