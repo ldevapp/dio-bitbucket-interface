@@ -25,7 +25,7 @@ function Actions({ repository }) {
 
     const icon = navigatorHasShare ? ShareIcon : CopyIcon
 
-    return <a href="#" onClick={action}><img alt="icon" width="26" src={icon} className="share-icon" /></a>
+    return <a href="/#" onClick={action}><img alt="icon" width="26" src={icon} className="share-icon" /></a>
   }
 
   return (
